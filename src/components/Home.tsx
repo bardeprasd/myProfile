@@ -111,7 +111,7 @@ export default function Home() {
   );
 
   const textCarousel = [
-    "Welcome to my portfolio! I'm a Full Stack Developer passionate about solving problems with intensity, Ownership and Clarity.",
+    "Welcome to my portfolio! I'm a Front End Developer passionate about solving problems with intensity, Ownership and Clarity.",
     "I love building beautiful and functional web applications using the latest technologies.",
     "Feel free to explore my projects and learn more about my journey in tech.",
     "Let's connect and build something amazing together!",
