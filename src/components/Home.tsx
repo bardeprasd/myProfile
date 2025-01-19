@@ -80,7 +80,7 @@ export default function Home() {
           width: 1,
         },
         move: {
-          direction: MoveDirection.none,
+          direction: MoveDirection.bottom,
           enable: true,
           outModes: {
             default: OutMode.out,
@@ -93,7 +93,7 @@ export default function Home() {
           density: {
             enable: true,
           },
-          value: 80,
+          value: 120,
         },
         opacity: {
           value: 0.5,

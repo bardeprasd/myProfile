@@ -17,7 +17,7 @@ function App() {
         <Header />
         <Box sx={{ padding: '16px 0' }}> {/* Optional padding to give space below Header */}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/myprofile" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

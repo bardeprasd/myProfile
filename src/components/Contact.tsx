@@ -16,29 +16,49 @@ const Contact = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Here you would typically handle form submission, e.g., sending the data to a server
     console.log('Form submitted:', { name, email, subject, message });
   };
 
   return (
-    <Container maxWidth="md" sx={{ bgcolor: '#121212', color: '#00FFFF', py: 8 }}> 
-      <Grid container spacing={4}> 
+    <Container
+      maxWidth="md"
+      sx={{
+        bgcolor: '#121212',
+        color: '#00FFFF',
+        py: 8,
+        boxShadow: '0px 6px 15px rgba(102, 252, 241, 0.8)', // Add shadow by default
+        transform: 'translateY(-5px)', // Add lift effect by default
+        transition: 'all 0.3s ease-in-out', // Smooth animation
+        borderRadius: 2, // Rounded corners
+      }}
+    >
+      <Grid container spacing={4}>
+        {/* Current Location Section */}
         <Grid item xs={12} md={6}>
           <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
             Current Location
           </Typography>
-          <Typography variant="body1" sx={{ mb: 1 }}>Bengaluru</Typography>
-          <Typography variant="body1" sx={{ mb: 1 }}>Karnataka</Typography>
-          <Typography variant="body1" sx={{ mb: 1 }}>India</Typography>
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            Pune
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            Maharashtra
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            India
+          </Typography>
           <Typography variant="body1">
             Email: bardeprasad2019@gmail.com
           </Typography>
         </Grid>
+
+        {/* Drop a Line Section */}
         <Grid item xs={12} md={6}>
           <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
             Drop a Line
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate>
+            {/* Name Input */}
             <TextField
               margin="normal"
               required
@@ -49,22 +69,18 @@ const Contact = () => {
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              sx={{ 
-                input: { color: '#00FFFF' }, 
+              sx={{
+                input: { color: '#00FFFF' },
                 label: { color: '#00FFFF' },
                 '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
+                  '& fieldset': { borderColor: '#00FFFF' },
+                  '&:hover fieldset': { borderColor: '#00FFFF' },
+                  '&.Mui-focused fieldset': { borderColor: '#00FFFF' },
                 },
               }}
             />
+
+            {/* Email Input */}
             <TextField
               margin="normal"
               required
@@ -75,22 +91,18 @@ const Contact = () => {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ 
-                input: { color: '#00FFFF' }, 
+              sx={{
+                input: { color: '#00FFFF' },
                 label: { color: '#00FFFF' },
                 '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
+                  '& fieldset': { borderColor: '#00FFFF' },
+                  '&:hover fieldset': { borderColor: '#00FFFF' },
+                  '&.Mui-focused fieldset': { borderColor: '#00FFFF' },
                 },
               }}
             />
+
+            {/* Subject Input */}
             <TextField
               margin="normal"
               required
@@ -100,22 +112,18 @@ const Contact = () => {
               name="subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              sx={{ 
-                input: { color: '#00FFFF' }, 
+              sx={{
+                input: { color: '#00FFFF' },
                 label: { color: '#00FFFF' },
                 '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
+                  '& fieldset': { borderColor: '#00FFFF' },
+                  '&:hover fieldset': { borderColor: '#00FFFF' },
+                  '&.Mui-focused fieldset': { borderColor: '#00FFFF' },
                 },
               }}
             />
+
+            {/* Message Input */}
             <TextField
               margin="normal"
               required
@@ -127,32 +135,28 @@ const Contact = () => {
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              sx={{ 
-                input: { color: '#00FFFF' }, 
+              sx={{
+                input: { color: '#00FFFF' },
                 label: { color: '#00FFFF' },
                 '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#00FFFF', 
-                  },
+                  '& fieldset': { borderColor: '#00FFFF' },
+                  '&:hover fieldset': { borderColor: '#00FFFF' },
+                  '&.Mui-focused fieldset': { borderColor: '#00FFFF' },
                 },
               }}
             />
+
+            {/* Submit Button */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ 
-                mt: 3, 
-                mb: 2, 
-                bgcolor: '#00FFFF', 
-                color: '#121212', 
-                '&:hover': { bgcolor: '#00BFFF' } 
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: '#00FFFF',
+                color: '#121212',
+                '&:hover': { bgcolor: '#00BFFF' },
               }}
             >
               SEND

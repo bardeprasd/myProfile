@@ -15,20 +15,23 @@ interface Project {
   githubLink?: string; // Optional GitHub link
 }
 
-// Define the Experience interface
-interface Experience {
-  year: string;
-  title: string;
-  description: string;
-}
-
 // Define the ProjectCard component
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   const imagePath = `${process.env.PUBLIC_URL}/${project.image}`;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      {project.githubLink ? ( // Conditionally render CardActionArea with href
+    <Card
+      sx={{
+        maxWidth: 345,
+        backgroundColor: "#1c1c1c",
+        color: "#66fcf1",
+        boxShadow: "0px 6px 15px rgba(102, 252, 241, 0.8)", // Shadow by default
+        transform: "translateY(-5px)", // Lift effect by default
+        transition: "all 0.3s ease-in-out", // Smooth animation
+        borderRadius: 2,
+      }}
+    >
+      {project.githubLink ? (
         <CardActionArea
           href={project.githubLink}
           target="_blank"
@@ -44,13 +47,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             <Typography gutterBottom variant="h5" component="div">
               {project.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="inherit">
               {project.technologies.join(" | ")}
             </Typography>
           </CardContent>
         </CardActionArea>
       ) : (
-        // Render without CardActionArea if no githubLink
         <>
           <CardMedia
             component="img"
@@ -62,59 +64,30 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             <Typography gutterBottom variant="h5" component="div">
               {project.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="inherit">
               {project.technologies.join(" | ")}
             </Typography>
           </CardContent>
         </>
       )}
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          sx={{
+            color: "#1c1c1c",
+            backgroundColor: "#66fcf1",
+            "&:hover": { backgroundColor: "#55b3d0" },
+          }}
+          onClick={() => {
+            if (project.githubLink) {
+              window.open(project.githubLink, "_blank", "noopener noreferrer");
+            }
+          }}
+        >
           Learn More
         </Button>
       </CardActions>
     </Card>
-  );
-};
-
-// Define the ExperienceCard component
-const ExperienceCard: React.FC<{ experience: Experience }> = ({
-  experience,
-}) => {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        mb: 2,
-        maxWidth: 600,
-        bgcolor: "background.paper",
-        p: 2,
-        borderRadius: 2,
-      }}
-    >
-      <Box
-        sx={{
-          bgcolor: "aqua",
-          color: "white",
-          p: 1,
-          mr: 2,
-          borderRadius: "50%",
-          minWidth: 40,
-          textAlign: "center",
-        }}
-      >
-        {experience.year}
-      </Box>
-      <Box>
-        <Typography variant="h6" component="div">
-          {experience.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {experience.description}
-        </Typography>
-      </Box>
-    </Box>
   );
 };
 
@@ -123,58 +96,112 @@ const projects: Project[] = [
   {
     title: "OTT Platform",
     image: "OTT.png",
-    technologies: ["React", "Material UI", "Firebase","Axios"],
+    technologies: ["React", "Material UI", "Firebase", "Axios"],
     githubLink: "https://github.com/bardeprasd/OTTPlatform-React",
   },
-  
 ];
 
-// Define the experience data
-const experiences: Experience[] = [
-  {
-    year: "2023 - 2024",
-    title: "Associate IT Consultant",
-    description: "ITC INFOTECH",
-  },
-  {
-    year: "MAR 2022 - APR 2022",
-    title: "AI/ML Intern",
-    description: "YBI FOUNDATION",
-  },
-];
-
-// Define the component to render projects and experiences
+// Define the Portfolio component
 const Portfolio: React.FC = () => {
   return (
-    <div>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        overflowY: "auto",
+        backgroundColor: "#1c1c1c",
+        paddingBottom: 8,
+        color: "#66fcf1",
+      }}
+    >
       {/* Projects Section */}
-      <Typography variant="h4" gutterBottom align="center" sx={{ mt: 4 }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{ mt: 4, color: "#66fcf1" }}
+      >
         Past Projects
       </Typography>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-around",
+          gap: 4,
+          mt: 4,
         }}
       >
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
-      </div>
+      </Box>
 
       {/* Experience Section */}
-      <Typography variant="h4" gutterBottom align="center" sx={{ mt: 4 }}>
-        Experience
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{ mt: 6, color: "#66fcf1" }}
+      >
+        Professional Experience
       </Typography>
       <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{
+          mt: 4,
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+          padding: 3,
+          backgroundColor: "#1c1c1c",
+          borderRadius: 2,
+          maxWidth: "800px",
+          margin: "auto",
+        }}
       >
-        {experiences.map((experience) => (
-          <ExperienceCard key={experience.title} experience={experience} />
-        ))}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            padding: 2,
+            borderRadius: 2,
+            backgroundColor: "#1c1c1c",
+            color: "#66fcf1",
+            boxShadow: "0px 6px 15px rgba(102, 252, 241, 0.8)", // Shadow by default
+            transform: "translateY(-5px)", // Lift effect by default
+            transition: "all 0.3s ease-in-out", // Smooth animation
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Front End Developer
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: "#66fcf1" }}>
+            Reg-X Innovations | December 2024 - Present
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            padding: 2,
+            borderRadius: 2,
+            backgroundColor: "#1c1c1c",
+            color: "#66fcf1",
+            boxShadow: "0px 6px 15px rgba(102, 252, 241, 0.8)", // Shadow by default
+            transform: "translateY(-5px)", // Lift effect by default
+            transition: "all 0.3s ease-in-out", // Smooth animation
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Associate IT Consultant
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: "#66fcf1" }}>
+            ITC Infotech | November 2023 - November 2024
+          </Typography>
+        </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 
