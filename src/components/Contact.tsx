@@ -7,16 +7,51 @@ import {
   Box,
   Grid,
 } from '@mui/material';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    console.log('Form submitted:', { name, email, subject, message });
+
+    const templateParams = {
+      name,
+      email,
+      subject,
+      message,
+    };
+
+    emailjs
+      .send(
+        'service_gyv5ylc', // Your Service ID
+        'template_bfuh8eh', // Your Template ID
+        templateParams,
+        'lgSLBe_PMhJ5iukqM' // Your User ID
+      )
+      .then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+          setSuccess(true);
+          setError(false);
+        },
+        (err) => {
+          console.error('FAILED...', err);
+          setError(true);
+          setSuccess(false);
+        }
+      );
+
+    // Clear the form
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
   };
 
   return (
@@ -26,14 +61,13 @@ const Contact = () => {
         bgcolor: '#121212',
         color: '#00FFFF',
         py: 8,
-        boxShadow: '0px 6px 15px rgba(102, 252, 241, 0.8)', // Add shadow by default
-        transform: 'translateY(-5px)', // Add lift effect by default
-        transition: 'all 0.3s ease-in-out', // Smooth animation
-        borderRadius: 2, // Rounded corners
+        boxShadow: '0px 6px 15px rgba(102, 252, 241, 0.8)',
+        transform: 'translateY(-5px)',
+        transition: 'all 0.3s ease-in-out',
+        borderRadius: 2,
       }}
     >
       <Grid container spacing={4}>
-        {/* Current Location Section */}
         <Grid item xs={12} md={6}>
           <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
             Current Location
@@ -52,13 +86,11 @@ const Contact = () => {
           </Typography>
         </Grid>
 
-        {/* Drop a Line Section */}
         <Grid item xs={12} md={6}>
           <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
             Drop a Line
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate>
-            {/* Name Input */}
             <TextField
               margin="normal"
               required
@@ -66,7 +98,6 @@ const Contact = () => {
               id="name"
               label="Name"
               name="name"
-              autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               sx={{
@@ -79,8 +110,6 @@ const Contact = () => {
                 },
               }}
             />
-
-            {/* Email Input */}
             <TextField
               margin="normal"
               required
@@ -88,7 +117,6 @@ const Contact = () => {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={{
@@ -101,8 +129,6 @@ const Contact = () => {
                 },
               }}
             />
-
-            {/* Subject Input */}
             <TextField
               margin="normal"
               required
@@ -122,8 +148,6 @@ const Contact = () => {
                 },
               }}
             />
-
-            {/* Message Input */}
             <TextField
               margin="normal"
               required
@@ -145,8 +169,6 @@ const Contact = () => {
                 },
               }}
             />
-
-            {/* Submit Button */}
             <Button
               type="submit"
               fullWidth
@@ -162,6 +184,16 @@ const Contact = () => {
               SEND
             </Button>
           </Box>
+          {success && (
+            <Typography color="success" sx={{ mt: 2 }}>
+              Your message was sent successfully!
+            </Typography>
+          )}
+          {error && (
+            <Typography color="error" sx={{ mt: 2 }}>
+              There was an error sending your message. Please try again.
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Container>

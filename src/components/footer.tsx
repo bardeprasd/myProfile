@@ -24,6 +24,11 @@ const theme = createTheme({
 export default function Footer() {
   const [value, setValue] = React.useState(0);
 
+  // Navigation URLs
+  const handleNavigation = (url: string | URL | undefined) => {
+    window.open(url, "_blank"); // Opens the link in a new tab
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ width: "100%", position: "fixed", bottom: 0, zIndex: 3 }}>
@@ -39,16 +44,19 @@ export default function Footer() {
             label="LinkedIn"
             icon={<LinkedInIcon />}
             sx={{ color: theme.palette.primary.main }}
+            onClick={() => handleNavigation("https://www.linkedin.com/in/prasad-barde")}
           />
           <BottomNavigationAction
             label="GitHub"
             icon={<GitHubIcon />}
             sx={{ color: theme.palette.primary.main }}
+            onClick={() => handleNavigation("https://github.com/bardeprasd")}
           />
           <BottomNavigationAction
             label="Instagram"
             icon={<InstagramIcon />}
             sx={{ color: theme.palette.primary.main }}
+            onClick={() => handleNavigation("https://www.instagram.com/your-profile")}
           />
         </BottomNavigation>
       </Box>

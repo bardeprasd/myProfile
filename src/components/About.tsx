@@ -31,12 +31,12 @@ const About: React.FC = () => {
   const navigate = useNavigate();
 
   // Resolve image path from the public folder
-  const imagePath = `${process.env.PUBLIC_URL}/p1.png`;
+  const imagePath = `${process.env.PUBLIC_URL}/mypic.jpg`;
 
   const skills = [
-    { name: 'Java', proficiency: 85 },
+    { name: 'JavaScript', proficiency: 85 },
     { name: 'React', proficiency: 90 },
-    { name: 'TypeScript', proficiency: 80 },
+    { name: 'Java', proficiency: 80 },
     { name: 'HTML', proficiency: 95 },
     { name: 'Spring Boot', proficiency: 85 },
     { name: 'MySQL', proficiency: 80 },

@@ -176,7 +176,7 @@ const Portfolio: React.FC = () => {
             Front End Developer
           </Typography>
           <Typography variant="subtitle1" sx={{ color: "#66fcf1" }}>
-            Reg-X Innovations | December 2024 - Present
+            Reg-X Innovations | Pune | December 2024 - Present
           </Typography>
         </Box>
         <Box
@@ -197,7 +197,7 @@ const Portfolio: React.FC = () => {
             Associate IT Consultant
           </Typography>
           <Typography variant="subtitle1" sx={{ color: "#66fcf1" }}>
-            ITC Infotech | November 2023 - November 2024
+            ITC Infotech | Bangalore | November 2023 - November 2024
           </Typography>
         </Box>
       </Box>
