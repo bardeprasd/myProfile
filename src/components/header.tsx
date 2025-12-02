@@ -4,10 +4,17 @@ import {
   Divider, List, ListItem, ListItemButton, ListItemText, CssBaseline
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useLocation } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Experience' ,'Contact']; // Fixed typo in "Experience"
+const navItems = [
+  { label: 'Home', id: 'home', offset: -72 },
+  { label: 'About', id: 'about', offset: -72 },
+  { label: 'Projects', id: 'projects', offset: -72 },
+  { label: 'Experience', id: 'experience', offset: -72 },
+  // Give contact a slightly positive offset so it activates as soon as the section comes into view
+  { label: 'Contact', id: 'contact', offset: 64 },
+];
 
 interface Props {
   window?: () => Window;
@@ -16,7 +23,7 @@ interface Props {
 export default function Header(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const location = useLocation();
+  const [activeSection, setActiveSection] = React.useState('home');
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -30,11 +37,20 @@ export default function Header(props: Props) {
       <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.3)' }} />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <Link to={`/${item.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <ListItemText primary={item} sx={{ color: 'white' }} />
-              </Link>
+              <ScrollLink
+                to={item.id}
+                spy
+                smooth
+                duration={500}
+                offset={item.offset}
+                onSetActive={() => setActiveSection(item.id)}
+                style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}
+                onClick={handleDrawerToggle}
+              >
+                <ListItemText primary={item.label} sx={{ color: 'white' }} />
+              </ScrollLink>
             </ListItemButton>
           </ListItem>
         ))}
@@ -72,21 +88,26 @@ export default function Header(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
             {navItems.map((item) => (
-              <Link
-                to={`/${item.toLowerCase()}`}
-                key={item}
+              <ScrollLink
+                key={item.id}
+                to={item.id}
+                spy
+                smooth
+                duration={500}
+                offset={item.offset}
+                onSetActive={() => setActiveSection(item.id)}
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <Button
                   sx={{
-                    color: location.pathname === `/${item.toLowerCase()}` ? '#66fcf1' : '#fff',
-                    borderBottom: location.pathname === `/${item.toLowerCase()}` ? '2px solid #66fcf1' : 'none',
+                    color: activeSection === item.id ? '#66fcf1' : '#fff',
+                    borderBottom: activeSection === item.id ? '2px solid #66fcf1' : 'none',
                     mx: 1.5,
                   }}
                 >
-                  {item}
+                  {item.label}
                 </Button>
-              </Link>
+              </ScrollLink>
             ))}
           </Box>
         </Toolbar>

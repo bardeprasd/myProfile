@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Box, Typography, LinearProgress, Button } from '@mui/material';
+import { Grid, Box, Typography, LinearProgress, Button, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 
 // Custom styled Box for the dark background
 const StyledBox = styled(Box)({
@@ -28,18 +28,66 @@ const ImageContainer = styled(Box)({
 });
 
 const About: React.FC = () => {
-  const navigate = useNavigate();
-
   // Resolve image path from the public folder
   const imagePath = `${process.env.PUBLIC_URL}/mypic.jpg`;
 
   const skills = [
-    { name: 'JavaScript', proficiency: 85 },
-    { name: 'React', proficiency: 90 },
-    { name: 'Java', proficiency: 80 },
-    { name: 'HTML', proficiency: 95 },
-    { name: 'Spring Boot', proficiency: 85 },
-    { name: 'MySQL', proficiency: 80 },
+    {
+      name: 'React',
+      proficiency: 90,
+      color: '#0a0a0a',
+      initials: 'R',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
+    },
+    {
+      name: 'TypeScript',
+      proficiency: 88,
+      color: '#0a0a0a',
+      initials: 'TS',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
+    },
+    {
+      name: 'Express',
+      proficiency: 82,
+      color: '#0a0a0a',
+      initials: 'Ex',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg',
+    },
+    {
+      name: 'MongoDB',
+      proficiency: 84,
+      color: '#0a0a0a',
+      initials: 'Mg',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg',
+    },
+    {
+      name: 'Next.js',
+      proficiency: 82,
+      color: '#0a0a0a',
+      initials: 'Nx',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg',
+    },
+    {
+      name: 'Git',
+      proficiency: 86,
+      color: '#0a0a0a',
+      initials: 'G',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg',
+    },
+    {
+      name: 'CI/CD',
+      proficiency: 80,
+      color: '#0a0a0a',
+      initials: 'CI',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg',
+    },
+    {
+      name: 'AWS',
+      proficiency: 76,
+      color: '#0a0a0a',
+      initials: 'A',
+      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original.svg',
+    },
   ];
 
   return (
@@ -69,10 +117,10 @@ const About: React.FC = () => {
             </Typography>
             <Typography variant="body1" paragraph sx={{ color: '#cccccc' }}>
               Hello, I am Prasad Barde, a passionate Front End Developer driven
-              by the desire to learn and implement new technologies. With
-              experience in the IT industry, I possess a robust skill set that
-              includes expertise in Java, Spring Framework, React.js,
-              JavaScript, and MySQL.
+              by the desire to learn and implement new technologies. My focus
+              is on building performant web apps with React, TypeScript, and
+              modern cloud-backed stacks using Express, MongoDB, Next.js,
+              AWS, Git, and CI/CD pipelines.
             </Typography>
           </Grid>
 
@@ -83,9 +131,24 @@ const About: React.FC = () => {
             </Typography>
             <Box display="flex" flexDirection="column" gap={3}>
               {skills.map((skill, index) => (
-                <Box key={index}>
-                  <Typography>{skill.name}</Typography>
-                  <Box sx={{ width: '100%' }}>
+                <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Avatar
+                    src={skill.logo}
+                    alt={skill.name}
+                    sx={{
+                      bgcolor: '#ffffff',
+                      color: '#0a0a0a',
+                      width: 36,
+                      height: 36,
+                      fontSize: 14,
+                      fontWeight: 'bold',
+                      border: '1px solid #303030',
+                    }}
+                  >
+                    {skill.initials}
+                  </Avatar>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography sx={{ fontWeight: 600 }}>{skill.name}</Typography>
                     <LinearProgress
                       variant="determinate"
                       value={skill.proficiency}
@@ -102,20 +165,21 @@ const About: React.FC = () => {
                 </Box>
               ))}
             </Box>
-            <Button
-              variant="contained"
-              sx={{
-                marginTop: '30px',
-                backgroundColor: '#66fcf1',
-                color: '#1c1c1c',
-                '&:hover': {
-                  backgroundColor: '#55b3d0',
-                },
-              }}
-              onClick={() => navigate('/experience')}
-            >
-              View Experience
-            </Button>
+            <ScrollLink to="experience" smooth duration={500} offset={-72} style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  marginTop: '30px',
+                  backgroundColor: '#66fcf1',
+                  color: '#1c1c1c',
+                  '&:hover': {
+                    backgroundColor: '#55b3d0',
+                  },
+                }}
+              >
+                View Experience
+              </Button>
+            </ScrollLink>
           </Grid>
         </Grid>
       </StyledBox>

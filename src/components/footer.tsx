@@ -50,7 +50,7 @@ export default function Footer() {
             label="GitHub"
             icon={<GitHubIcon />}
             sx={{ color: theme.palette.primary.main }}
-            onClick={() => handleNavigation("https://github.com/bardeprasd")}
+            onClick={() => handleNavigation("https://github.com/Prasad-Regx")}
           />
           <BottomNavigationAction
             label="Instagram"

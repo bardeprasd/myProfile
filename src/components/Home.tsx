@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Typography, Button, Slide } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions, MoveDirection, OutMode } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
@@ -118,52 +118,48 @@ export default function Home() {
   ];
 
   return (
-    <Box sx={{ position: 'absolute', minHeight: '100vh', overflow: 'hidden' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        color: '#ffffff',
+        px: 3,
+        py: 8,
+      }}
+    >
       {init && (
         <>
           <div style={{ 
-            position: "absolute", 
-            top: 0, 
-            left: 0, 
-            width: "100%", 
-            height: "100%", 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            zIndex: -1 
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            zIndex: -1
           }} />
           <Particles
             id="tsparticles"
             particlesLoaded={particlesLoaded}
             options={options}
             style={{ 
-              position: "absolute", 
-              top: 0, 
-              left: 0, 
-              width: "100%", 
-              height: "100%", 
-              overflow: "hidden" 
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              overflow: "hidden"
             }} 
           />
         </>
       )}
-      <Box
-        sx={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          textAlign: 'center',
-          color: '#ffffff',
-          padding: 4,
-          boxSizing: 'border-box',
-          zIndex: 1,
-        }}
-      >
+      <Box sx={{ position: 'relative', zIndex: 1, maxWidth: 900 }}>
         <Typography variant="h3" component="div" gutterBottom sx={{ fontWeight: 'bold' }}>
           Hi, I'm PRASAD 
         </Typography>
@@ -172,11 +168,11 @@ export default function Home() {
             {textCarousel[currentTextIndex]}
           </Typography>
         </Slide>
-        <Link to="/about" style={{ textDecoration: 'none', marginTop: '16px' }}>
+        <ScrollLink to="about" smooth duration={500} offset={-72} style={{ textDecoration: 'none', marginTop: '16px' }}>
           <Button variant="contained" sx={{ backgroundColor: '#66fcf1', color: '#1c1c1c' }}>
             Read More
           </Button>
-        </Link>
+        </ScrollLink>
       </Box>
     </Box>
   );
